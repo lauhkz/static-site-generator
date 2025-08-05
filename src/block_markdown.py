@@ -8,6 +8,14 @@ class BlockType(Enum):
     ULIST = "unordered text"
     OLIST = "ordered_list text"
 
+
+def markdown_to_html_node(md):
+    blocks = markdown_to_blocks(md)
+    html_string = ""
+    for block in blocks:
+        block_type = block_to_block_type(block)
+        print(block_type)
+
 def block_to_block_type(block):
     lines = block.split("\n")
 
@@ -34,17 +42,6 @@ def block_to_block_type(block):
         return BlockType.OLIST
     return BlockType.PARAGRAPH
 
-def is_ordered(text):
-    n = 1
-    for line in markdown_to_blocks(text):
-        if line.startswith("{n}. "):
-            n += 1
-
-    
-
-
-    
-    
 
 def markdown_to_blocks(md):
     splitted = md.split("\n\n")
